@@ -4,6 +4,8 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
+var fallen;
+fallen = false;
 
 function preload()
 {
@@ -80,11 +82,18 @@ function draw() {
 function keyPressed() {
 	if(keyCode === LEFT_ARROW) {
 		helicopterSprite.x = helicopterSprite.x-20
-		Matter.Body.translate(packageBody, {x: -20, y:0})	
-	} else if(keyCode === RIGHT_ARROW)	{
+
+		if(fallen == false){
+			Matter.Body.translate(packageBody, {x: -20, y:0})
+		}
+	} else if(keyCode === RIGHT_ARROW )	{
 		helicopterSprite.x = helicopterSprite.x+20
-		Matter.Body.translate(packageBody, {x: 20, y:0})		
-	} else if(keyCode === DOWN_ARROW) {
+
+		if(fallen == false){
+			Matter.Body.translate(packageBody, {x: 20, y:0})	
+		}
+	} else if(keyCode === DOWN_ARROW && fallen == false) {
 		Matter.Body.setStatic(packageBody, false)
+		fallen = true;
 	}
 }
